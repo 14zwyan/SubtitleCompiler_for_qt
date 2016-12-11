@@ -32,7 +32,7 @@
        </widget>
       </item>
       <item row="5" column="0" colspan="3">
-       <widget class="QTextBrowser" name="textBrowser"/>
+       <widget class="QTextBrowser" name="textBrowser_result"/>
       </item>
       <item row="0" column="2">
        <widget class="QPushButton" name="pushButton_parse">

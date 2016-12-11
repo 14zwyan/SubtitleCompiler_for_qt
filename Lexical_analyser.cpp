@@ -7,6 +7,8 @@
 #include<iomanip>
 
 #include<boost/lexical_cast.hpp>
+#include<boost/algorithm/string.hpp>
+#include<boost/version.hpp>
 
 using std::string;  using std::set;
 using std::cout;  using std::endl; using std::vector;
@@ -282,15 +284,38 @@ bool Lexical_analyser::ReadChar(char ch)
         if ( type_set.find( createType ) != type_set.end() ) //2
         {
             string temp;
-            int index;
-            for(index=0; char_buffer_[index] == ' '; ++index)
-            {
-                /*empty**/
-            }
-            //cout<<"char_buffer"<<char_buffer_<<endl;
-            int length=char_buffer_.length();
-            char_buffer_=char_buffer_.substr(index);
+            boost::trim(char_buffer_);
+           // cout<<"Bosst version:"<<BOOST_VERSION<<endl;
+
         }
+
+//            int index_left;  // the last index of empty char of left part
+//            for(index_left=0; char_buffer_[index_left] == ' '; ++index_left)
+//            {
+//                /*empty**/
+//            }
+//            //cout<<"char_buffer"<<char_buffer_<<endl;
+//            int length=char_buffer_.length();
+//            int index_right;
+//            for (index_right= length-1;
+//                     (index_right != -1) && (char_buffer_[index_right] =='\n' || char_buffer_[index_right] ==' ' );
+//                 --index_right)
+//            {
+//                /*empty**/
+//            }
+
+//            if (index_right -index_left +1 >0)
+//            {
+//                char_buffer_=char_buffer_.substr(index_left, index_right-index_left +1);
+//            }
+//            else
+//            {
+//                cout<<"some problem"<<endl;
+//                cout<<char_buffer_<<endl;
+//            }
+//        }
+
+
 
         tokens_.push_back( Token(createType, char_buffer_));
         //cout<<"tokens.push_back: "<<tokens_.back().type()<<
@@ -334,4 +359,46 @@ void Lexical_analyser::test(string text)
     cout<<"]"<<endl;
     cout<<"Parse end"<<endl;
     cout<<tokens_.size()<<endl;
+}
+
+
+string Lexical_analyser::process(const std::string &text)
+{
+   // cout<<"In"<<endl;
+    int i=0;
+    char ch=text[0];
+
+    while( i <text.length())
+    {
+        if( ReadChar(ch) )
+        {
+            //cout<<"ReadChar("<<ch<<")"<<" successful"<<endl;
+            ++i;
+            if( i <text.length() )
+                ch=text[i];
+            else
+                break;
+        }
+    }
+    cout<<"Here"<<tokens_.size()<<endl;
+    vector<Token>::iterator begin=tokens_.begin();
+    vector<Token>::iterator end=tokens_.end();
+
+    string double_quote="\"";
+    std::string result="["  ;
+    //int fuck=0;
+    while( begin != end)
+    {
+            //cout<<"i"<<++fuck<<endl;
+            result+=double_quote+(*begin).PresentType()+double_quote+","+double_quote+(*begin).value()+double_quote;
+            cout<<"Result"<<result<<endl;
+
+            ++begin;
+    }
+    //cout<<"out"<<endl;
+
+    result+="]";
+    cout<<"done"<<endl;
+
+    return result;
 }

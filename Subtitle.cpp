@@ -23,7 +23,7 @@ void Time::set_time(string time)
     minute_=boost::lexical_cast<int> ( temp_minute);
     second_ = boost::lexical_cast<int> ( temp_second);
     msecond_ = boost::lexical_cast<int> (temp_msecond);
-
+    time_=time;
 }
 
 

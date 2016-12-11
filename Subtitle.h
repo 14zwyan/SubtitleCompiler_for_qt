@@ -2,6 +2,9 @@
 #define SUBTITLE_H
 
 #include<string>
+#include<sstream>
+
+#include<boost/lexical_cast.hpp>
 
 class Time
 {
@@ -11,6 +14,9 @@ public:
     void set_second(int  second)  { second_=second; }
     void set_time(std::string time);
     void clear()   { hour_=minute_=second_=msecond_=-1; time_=""; }
+    std::string time()  { return time_; }
+
+
 private:
     int  hour_;
     int  minute_;
@@ -22,10 +28,14 @@ private:
 class Subtitle
 {
 public:
-    Subtitle(int counter,Time start, Time end):
-        counter_(counter), start_time_(start), end_time_(end)
+    Subtitle(int counter,Time start, Time end,std::string content):
+        counter_(counter), start_time_(start), end_time_(end) ,content_(content)
     {  /*empty **/ }
 
+    std::string counter()  { std::stringstream ss; ss<<counter_;  return ss.str();}
+    std::string start_time()  { return start_time_.time();}
+    std::string end_time()   { return end_time_.time(); }
+    std::string content()  { return content_; }
 
 private:
     int counter_;

@@ -1,6 +1,9 @@
 #ifndef PARSER_H
 #define PARSER_H
 
+#include<utility>
+#include<string>
+
 #include"Lexical_analyser.h"
 
 enum State
@@ -23,9 +26,11 @@ public:
 
     void test( const  std::string &text);
 
+    std::pair<std::string,bool> DoParse_For_Qt(const  std::string  &content);
+    void print_tokens();
 private:
     Lexical_analyser lexical_analyser_;
-    State state_;
+    State state_=START;
 
 };
 
