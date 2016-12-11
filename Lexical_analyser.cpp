@@ -380,7 +380,7 @@ string Lexical_analyser::process(const std::string &text)
                 break;
         }
     }
-    cout<<"Here"<<tokens_.size()<<endl;
+   // cout<<"Here"<<tokens_.size()<<endl;
     vector<Token>::iterator begin=tokens_.begin();
     vector<Token>::iterator end=tokens_.end();
 
@@ -391,14 +391,14 @@ string Lexical_analyser::process(const std::string &text)
     {
             //cout<<"i"<<++fuck<<endl;
             result+=double_quote+(*begin).PresentType()+double_quote+","+double_quote+(*begin).value()+double_quote;
-            cout<<"Result"<<result<<endl;
+            //cout<<"Result"<<result<<endl;
 
             ++begin;
     }
     //cout<<"out"<<endl;
 
     result+="]";
-    cout<<"done"<<endl;
+    //cout<<"done"<<endl;
 
     return result;
 }

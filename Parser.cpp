@@ -30,6 +30,7 @@ void Parser::DoParse(const  string  &content)
     char ch=content[i];
     int token_count=0;
     std::string text="";
+    state_=START;
 
     while( i != content.length() ) //1
     {
@@ -128,14 +129,14 @@ void Parser::DoParse(const  string  &content)
                 break;
         }
     }
+    subtitles_=subtitles;
 
-
-    cout<<"Tokens"<<endl;
-    for (auto token : lexical_analyser_.GetTokens() )
-    {
-        cout<<token.PresentType()<<", "<<token.value()<<", ";
-    }
-    cout<<endl;
+//    cout<<"Tokens"<<endl;
+//    for (auto token : lexical_analyser_.GetTokens() )
+//    {
+//        cout<<token.PresentType()<<", "<<token.value()<<", ";
+//    }
+//    cout<<endl;
 
 
 }
@@ -287,7 +288,7 @@ pair<string,bool> Parser::DoParse_For_Qt(const  string  &content)
         ++begin;
     }
 
-
+    subtitles_=subtitles;
     return pair<string,bool>(result,true);
 
 

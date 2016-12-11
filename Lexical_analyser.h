@@ -21,6 +21,8 @@ public:
     int  GetTokensLength()   { return tokens_.size(); }
     Token GetLastToken()   { return tokens_.back(); }
     const std::vector<Token>& GetTokens()  { return tokens_;}
+
+    void clear()   { tokens_.clear(); char_buffer_="";  state_=TYPE_TEXT; }
 private:
 
     std::vector<Token> tokens_;
